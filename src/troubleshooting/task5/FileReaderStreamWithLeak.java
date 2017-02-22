@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class FileReaderStream {
+public class FileReaderStreamWithLeak {
     private static final int WORDS_QUANTITY = 3;
     private static final String DELIMITER = " ";
 
