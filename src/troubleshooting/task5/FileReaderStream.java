@@ -14,8 +14,8 @@ public class FileReaderStream {
 
     public static void main(final String[] args) throws InterruptedException, IOException {
         String fileName = "Task #5 - Data.txt";
-        List<List<String>> words = getAllWords(fileName);
-        System.out.println(words);
+        List<List<String>> listsOfThreeWordsLists = getAllWords(fileName);
+        System.out.println(listsOfThreeWordsLists);
         Thread.sleep(30000);
     }
 
@@ -24,8 +24,8 @@ public class FileReaderStream {
         return lines
                 .map(line -> line.split(DELIMITER))
                 .map(strings -> {
-                    List<String> words = Arrays.asList(strings);
-                    return words.subList(words.size() - WORDS_QUANTITY, words.size());
+                    List<String> threeWordList = Arrays.asList(strings);
+                    return threeWordList.subList(threeWordList.size() - WORDS_QUANTITY, threeWordList.size());
                 })
                 .flatMap(Stream::of).collect(Collectors.toList());
     }
