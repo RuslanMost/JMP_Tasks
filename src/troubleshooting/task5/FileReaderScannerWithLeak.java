@@ -9,10 +9,10 @@ public class FileReaderScannerWithLeak {
 
     public static void main(final String[] args) throws InterruptedException, IOException {
         String fileName = "Task #5 - Data.txt";
-        List<List<String>> allLines = getSplitedLines(fileName);
-        List<List<String>> collect = getAllLists(allLines);
-        System.out.println(collect);
-        Thread.sleep(30000);
+        List<List<String>> allLines = getSplittedLines(fileName);
+        List<List<String>> threeWordsLists = getAllLists(allLines);
+        System.out.println(threeWordsLists);
+        Thread.sleep(60000);
     }
 
     private static List<List<String>> getAllLists(final List<List<String>> allLines) {
@@ -24,7 +24,7 @@ public class FileReaderScannerWithLeak {
         return threeWordsLists;
     }
 
-    private static List<List<String>> getSplitedLines(final String fileName) throws IOException {
+    private static List<List<String>> getSplittedLines(final String fileName) throws IOException {
         List<List<String>> lines = new ArrayList<>();
         try (FileInputStream inputStream = new FileInputStream(fileName); Scanner sc = new Scanner(inputStream)) {
             while (sc.hasNextLine()) {
