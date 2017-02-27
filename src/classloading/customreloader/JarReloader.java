@@ -3,97 +3,123 @@ package classloading.customreloader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.DataInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.jar.JarFile;
 
 public class JarReloader {
-    private String jarName;
+
+    private static final String CLASS_EXTENSION = ".class";
     private ClassLoader parentClassLoader;
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
+    private File file;
 
     public JarReloader(final String jarName, final ClassLoader parentClassLoader) {
-        this.jarName = jarName;
         if (parentClassLoader == null) {
             this.parentClassLoader = this.getClass().getClassLoader();
         }
+        file = new File(jarName);
     }
 
-    public JarReloader(String jarName) {
-        this.jarName = jarName;
+    public JarReloader(final String jarName) {
         this.parentClassLoader = this.getClass().getClassLoader();
+        file = new File(jarName);
     }
 
-    public void reloadJar() throws IOException {
-        File file = new File(jarName);
+    public List<Class<?>> reloadJar() throws IOException {
         JarFile jarFile = new JarFile(file);
         LOGGER.info("Scanning jar file - " + jarFile.getName() + " for classes to reload.");
-        URL jarURL = file.toURI().toURL();
+        List<String> classesNames = new ArrayList<>();
         jarFile.stream()
                 .forEach(jarEntry -> {
                     String jarEntryName = jarEntry.getName();
-                    if (jarEntry.isDirectory() || !jarEntryName.endsWith(".class")) {
+                    if (jarEntry.isDirectory() || !jarEntryName.endsWith(CLASS_EXTENSION)) {
                         LOGGER.info(jarEntryName + " - is not a class... ignoring.");
                     } else {
-                        String className = jarEntryName.replaceAll("/", ".").replace(".class", "");
-                        LOGGER.info(className + " - is loaded.");
-                        try (MyUrlClassLoader urlClassLoader = new MyUrlClassLoader(new URL[]{jarURL}, parentClassLoader)) {
-                            try {
-                                urlClassLoader.loadClass(className);
-                            } catch (ClassNotFoundException e) {
-                                LOGGER.error(className + " was not found.", e);
-                            }
-                        } catch (IOException e) {
-                            LOGGER.error(e);
-                        }
+                        LOGGER.info(jarEntryName + " - will be reloaded.");
+                        classesNames.add(jarEntryName);
                     }
                 });
+        return reloadClasses(classesNames);
+    }
+
+    private List<Class<?>> reloadClasses(final List<String> classesNames) throws MalformedURLException {
+        List<Class<?>> reloadedClasses = new ArrayList<>();
+        URL jarURL = file.toURI().toURL();
+        try (MyUrlClassLoader urlClassLoader = new MyUrlClassLoader(new URL[]{jarURL}, parentClassLoader)) {
+            classesNames.stream().forEach(jarEntryName -> {
+                try {
+                    reloadedClasses.add(urlClassLoader.loadClass(jarEntryName));
+                    LOGGER.info(jarEntryName + " was reloaded.");
+                } catch (ClassNotFoundException e) {
+                    LOGGER.error(e);
+                }
+            });
+        } catch (IOException e) {
+            LOGGER.error(e);
+        }
+        return reloadedClasses.isEmpty() ? Collections.emptyList() : reloadedClasses;
     }
 
     private class MyUrlClassLoader extends URLClassLoader {
+
+        private static final String DOT_DELIMITER = ".";
+        private static final String SLASH_DELIMITER = "/";
+        private static final String EMPTY_STRING = "";
+        public static final int BEGIN_INDEX = 0;
+
         public MyUrlClassLoader(final URL[] urls, final ClassLoader parent) {
             super(urls, parent);
         }
 
         @Override
         public Class<?> loadClass(final String name) throws ClassNotFoundException {
+            String className = name.replaceAll(SLASH_DELIMITER, DOT_DELIMITER).replace(CLASS_EXTENSION, EMPTY_STRING);
+
             SecurityManager sm = System.getSecurityManager();
             if (sm != null) {
-                int i = name.lastIndexOf('.');
+                int i = className.lastIndexOf(DOT_DELIMITER);
                 if (i != -1) {
-                    sm.checkPackageAccess(name.substring(0, i));
+                    sm.checkPackageAccess(className.substring(BEGIN_INDEX, i));
                 }
             }
 
-            return super.loadClass(name);
-        }
-
-        private byte[] loadClassData(String className) throws IOException {
-            try {
-                /*
-                 * get the actual path using the original classloader
-                 */
-                Class<?> clazz = getParent().loadClass(className);
-                URL url = clazz.getResource(clazz.getSimpleName() + ".class");
-
-                /*
-                 * force reload
-                 */
-                File f = new File(url.toURI());
-                int size = (int) f.length();
-                byte buff[] = new byte[size];
-                FileInputStream fis = new FileInputStream(f);
-                DataInputStream dis = new DataInputStream(fis);
-                dis.readFully(buff);
-                dis.close();
-                return buff;
-            } catch (Exception ex) {
-                throw new IOException(ex);
+            //for those classes which are referenced by other classes
+            if (!name.endsWith(CLASS_EXTENSION)) {
+                return super.loadClass(name);
             }
+
+            //check if a class was already loaded
+            if (findLoadedClass(className) != null) {
+                return findLoadedClass(className);
+            }
+
+            try {
+                InputStream input = getResourceAsStream(name);
+                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                int data = input.read();
+
+                while (data != -1) {
+                    buffer.write(data);
+                    data = input.read();
+                }
+
+                input.close();
+                byte[] classData = buffer.toByteArray();
+                return defineClass(className, classData, 0, classData.length);
+            } catch (IOException e) {
+                LOGGER.error(e);
+            }
+
+            return null;
         }
     }
 
