@@ -103,6 +103,14 @@ public class Computer implements Serializable {
         this.monitor = monitor;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(final String type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         if (!type.equals("box")) {
