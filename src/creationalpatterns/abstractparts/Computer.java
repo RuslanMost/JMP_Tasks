@@ -113,8 +113,12 @@ public class Computer implements Serializable {
 
     @Override
     public String toString() {
-        if (!type.equals("box")) {
-            return "I'm " + type + ", and ready to serve you my Lord.";
-        } else return "I'm just a " + type + ", sorry about that.";
+        return "Computer{" +
+                "type='" + type + '\'' +
+                ", mouse=" + mouse +
+                ", keyboard=" + keyboard +
+                ", systemBlock=" + systemBlock +
+                ", monitor=" + monitor +
+                '}';
     }
 }
