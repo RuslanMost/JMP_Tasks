@@ -7,11 +7,11 @@ import java.util.List;
 public class Director {
     Computer.ComputerBuilder computerBuilder;
 
-    public Director() {
+    public Director() throws InterruptedException {
         computerBuilder = Computer.buildMainPart();
     }
 
-    public Computer buildComputer(final List<String> parts) {
+    public Computer buildComputer(final List<String> parts) throws InterruptedException {
         parts.stream()
                 .forEach(part -> {
                     if ("expensive system block".equals(part)) {

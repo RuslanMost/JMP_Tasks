@@ -13,7 +13,6 @@ public class CheapComputerServiceImpl extends AbstractComputerService {
                 .addCheapMouse()
                 .addCheapSystemBlock()
                 .build();
-        cheapComputer.installOS();
         saveToFile(cheapComputer);
         return cheapComputer;
     }

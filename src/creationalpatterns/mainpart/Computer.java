@@ -47,7 +47,9 @@ public class Computer implements Serializable {
         return monitor;
     }
 
-    public static ComputerBuilder buildMainPart() {
+    public static ComputerBuilder buildMainPart() throws InterruptedException {
+        System.out.println("Building a new PC for you!!");
+        Thread.sleep(785);
         return new Computer().new ComputerBuilder();
     }
 
@@ -64,8 +66,10 @@ public class Computer implements Serializable {
             // private constructor
         }
 
-        public Computer build() {
-            return new Computer(mouse, keyboard, systemBlock, monitor);
+        public Computer build() throws InterruptedException {
+            Computer computer = new Computer(mouse, keyboard, systemBlock, monitor);
+            computer.installOS();
+            return computer;
         }
 
         public ComputerBuilder addExpensiveSystemBlock() {

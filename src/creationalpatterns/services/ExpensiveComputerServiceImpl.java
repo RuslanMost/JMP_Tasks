@@ -13,7 +13,6 @@ public class ExpensiveComputerServiceImpl extends AbstractComputerService {
                 .addExpensiveSystemBlock()
                 .addExpensiveMouse()
                 .build();
-        expensiveComputer.installOS();
         saveToFile(expensiveComputer);
         return expensiveComputer;
     }
