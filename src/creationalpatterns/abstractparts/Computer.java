@@ -9,53 +9,6 @@ public class Computer implements Serializable {
     private SystemBlock systemBlock;
     private Monitor monitor;
 
-    public Computer(final String type, final SystemBlock systemBlock, final Monitor monitor, final Mouse mouse, final Keyboard keyboard) {
-        this.type = type;
-        this.mouse = mouse;
-        this.keyboard = keyboard;
-        this.systemBlock = systemBlock;
-        this.monitor = monitor;
-    }
-
-    public Computer(final String type, final SystemBlock systemBlock, final Monitor monitor) {
-        this.type = type;
-        this.monitor = monitor;
-        this.systemBlock = systemBlock;
-    }
-
-    public Computer(final String type, final SystemBlock systemBlock, final Monitor monitor, final Mouse mouse) {
-        this.type = type;
-        this.systemBlock = systemBlock;
-        this.monitor = monitor;
-        this.mouse = mouse;
-    }
-
-    public Computer(final String type, final SystemBlock systemBlock, final Monitor monitor, final Keyboard keyboard) {
-        this.type = type;
-        this.systemBlock = systemBlock;
-        this.monitor = monitor;
-        this.keyboard = keyboard;
-    }
-
-    public Computer(final String type, final SystemBlock systemBlock, final Mouse mouse) {
-        this.type = type;
-        this.systemBlock = systemBlock;
-        this.mouse = mouse;
-    }
-
-    public Computer(final String type, final SystemBlock systemBlock, final Keyboard keyboard) {
-        this.type = type;
-        this.systemBlock = systemBlock;
-        this.keyboard = keyboard;
-    }
-
-    public Computer(final String type, final SystemBlock systemBlock, final Keyboard keyboard, final Mouse mouse) {
-        this.type = type;
-        this.systemBlock = systemBlock;
-        this.keyboard = keyboard;
-        this.mouse = mouse;
-    }
-
     public Computer(final String type, final SystemBlock systemBlock) {
         this.type = type;
         this.systemBlock = systemBlock;

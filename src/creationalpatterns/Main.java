@@ -1,20 +1,21 @@
 package creationalpatterns;
 
-import creationalpatterns.abstractparts.Computer;
-import creationalpatterns.services.ComputerService;
+import creationalpatterns.services.AbstractComputerService;
+
+import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         String typeOfComputer;
         if (args.length != 1) {
-            typeOfComputer = "expensive";
+            typeOfComputer = "cheap";
         } else {
             typeOfComputer = args[0];
         }
 
-        ComputerService service = new ComputerService();
-        Computer computer = service.process(typeOfComputer);
-
-        System.out.println(computer);
+        Optional<AbstractComputerService> optionalService = AbstractComputerService.getService(typeOfComputer);
+        if (optionalService.isPresent()) {
+            System.out.println(optionalService.get().process());
+        }
     }
 }
