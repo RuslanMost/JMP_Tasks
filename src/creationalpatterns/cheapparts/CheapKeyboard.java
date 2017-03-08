@@ -1,4 +1,4 @@
-package creationalpatterns.cheaparts;
+package creationalpatterns.cheapparts;
 
 import creationalpatterns.abstractparts.Keyboard;
 

@@ -1,6 +1,6 @@
 package creationalpatterns.services;
 
-import creationalpatterns.abstractparts.Computer;
+import creationalpatterns.mainpart.Computer;
 
 import java.io.*;
 import java.util.Optional;
