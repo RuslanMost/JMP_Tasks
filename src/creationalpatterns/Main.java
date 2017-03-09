@@ -1,8 +1,9 @@
 package creationalpatterns;
 
-import creationalpatterns.services.AbstractComputerService;
-
-import java.util.Optional;
+import creationalpatterns.mainpart.Computer;
+import creationalpatterns.services.CheapComputerFactoryImpl;
+import creationalpatterns.services.ComputerService;
+import creationalpatterns.services.ExpensiveComputerFactoryImpl;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -13,9 +14,16 @@ public class Main {
             typeOfComputer = args[0];
         }
 
-        Optional<AbstractComputerService> optionalService = AbstractComputerService.getService(typeOfComputer);
-        if (optionalService.isPresent()) {
-            System.out.println(optionalService.get().process());
+        ComputerService service = new ComputerService();
+
+        if ("cheap".equals(typeOfComputer)) {
+            service.setComputerFactory(new CheapComputerFactoryImpl());
+        } else if ("expensive".equals(typeOfComputer)) {
+            service.setComputerFactory(new ExpensiveComputerFactoryImpl());
         }
+
+        Computer computer = service.process();
+        System.out.println(computer);
+
     }
 }

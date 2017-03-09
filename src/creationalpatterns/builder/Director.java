@@ -32,6 +32,8 @@ public class Director {
                         computerBuilder.addCheapMouse();
                     }
                 });
-        return computerBuilder.build();
+        Computer computer = computerBuilder.build();
+        computer.installOS();
+        return computer;
     }
 }

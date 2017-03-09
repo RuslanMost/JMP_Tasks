@@ -68,7 +68,6 @@ public class Computer implements Serializable {
 
         public Computer build() throws InterruptedException {
             Computer computer = new Computer(mouse, keyboard, systemBlock, monitor);
-            computer.installOS();
             return computer;
         }
 

@@ -2,9 +2,9 @@ package creationalpatterns.services;
 
 import creationalpatterns.mainpart.Computer;
 
-public class ExpensiveComputerServiceImpl extends AbstractComputerService {
+public class ExpensiveComputerFactoryImpl extends AbstractComputerFactory {
     @Override
-    public Computer process() throws InterruptedException {
+    public Computer getComputer() throws InterruptedException {
         System.out.println("Expensive computer is building... Wait for that...");
         Thread.sleep(1285);
         final Computer expensiveComputer = Computer.buildMainPart()
