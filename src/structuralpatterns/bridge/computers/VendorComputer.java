@@ -11,6 +11,10 @@ public abstract class VendorComputer {
 
     protected abstract String getDescription();
 
+    public String calculate() {
+        return threadChipForm.calculate();
+    }
+
     @Override
     public String toString() {
         return getDescription();
