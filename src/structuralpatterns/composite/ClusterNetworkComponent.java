@@ -13,7 +13,6 @@ public class ClusterNetworkComponent implements NetworkComponent {
 
     @Override
     public void doWork() {
-        System.out.println(getWorkload());
         final int normalWorkLoadThreshold = 12;
         components.sort(Comparator.comparing(NetworkComponent::getWorkload));
         components.stream()

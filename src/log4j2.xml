@@ -9,7 +9,10 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="classloading.customreloader.Main" level="info" additivity="false">
+        <Logger name="classloading.customreloader.JarReloader" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="structuralpatterns.decorator.LoggerNetworkDecorator" level="info" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
         <Root level="error">

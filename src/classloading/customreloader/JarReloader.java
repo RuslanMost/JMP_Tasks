@@ -19,7 +19,7 @@ public class JarReloader {
 
     private static final String CLASS_EXTENSION = ".class";
     private ClassLoader parentClassLoader;
-    private static final Logger LOGGER = LogManager.getLogger(Main.class);
+    private static final Logger LOGGER = LogManager.getLogger(JarReloader.class);
     private File file;
 
     public JarReloader(final String jarName, final ClassLoader parentClassLoader) {
