@@ -3,7 +3,7 @@ package structuralpatterns.decorator;
 import structuralpatterns.composite.NetworkComponent;
 
 
-public class NetworkDecorator implements NetworkComponent {
+public abstract class NetworkDecorator implements NetworkComponent {
 
     NetworkComponent networkComponent;
 
