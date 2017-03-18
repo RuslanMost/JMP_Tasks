@@ -21,9 +21,4 @@ public class SingleNetworkComponent implements NetworkComponent {
     public int getWorkload() {
         return workloadCount;
     }
-
-    @Override
-    public void addComponent(final NetworkComponent component) {
-        throw new UnsupportedOperationException();
-    }
 }

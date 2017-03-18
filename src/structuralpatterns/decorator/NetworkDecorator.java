@@ -20,9 +20,4 @@ public abstract class NetworkDecorator implements NetworkComponent {
     public int getWorkload() {
         return networkComponent.getWorkload();
     }
-
-    @Override
-    public void addComponent(final NetworkComponent component) {
-        networkComponent.addComponent(component);
-    }
 }

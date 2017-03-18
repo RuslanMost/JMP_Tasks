@@ -1,6 +1,7 @@
 package structuralpatterns.composite;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -8,7 +9,8 @@ public class ClusterNetworkComponent implements NetworkComponent {
     private int workloadCount;
     private List<NetworkComponent> components = new ArrayList<>();
 
-    public ClusterNetworkComponent() {
+    public ClusterNetworkComponent(NetworkComponent... networkComponents) {
+        Collections.addAll(components, networkComponents);
     }
 
     @Override
@@ -28,10 +30,11 @@ public class ClusterNetworkComponent implements NetworkComponent {
         return workloadCount;
     }
 
-    @Override
     public void addComponent(final NetworkComponent component) {
         components.add(component);
     }
 
-
+    public NetworkComponent getLeafComponent(final int index) {
+        return components.get(index);
+    }
 }

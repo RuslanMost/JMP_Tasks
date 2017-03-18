@@ -58,50 +58,40 @@ public class TestDecorator {
         NetworkComponent singleNetworkComponent20 =
                 new LoggerNetworkDecorator(new SingleNetworkComponent(new IntelComputer(new MultithreadChip()), 7));
 
-        NetworkComponent clusterNetworkComponent1 =
-                new LoggerNetworkDecorator(new ClusterNetworkComponent());
-        NetworkComponent clusterNetworkComponent2 =
-                new LoggerNetworkDecorator(new ClusterNetworkComponent());
-        NetworkComponent clusterNetworkComponent3 =
-                new LoggerNetworkDecorator(new ClusterNetworkComponent());
-        NetworkComponent clusterNetworkComponent4 =
-                new LoggerNetworkDecorator(new ClusterNetworkComponent());
-        NetworkComponent clusterNetworkComponent5 =
-                new LoggerNetworkDecorator(new ClusterNetworkComponent());
-
-        clusterNetworkComponent1.addComponent(singleNetworkComponent1);
-        clusterNetworkComponent1.addComponent(singleNetworkComponent2);
-        clusterNetworkComponent1.addComponent(singleNetworkComponent3);
-        clusterNetworkComponent1.addComponent(singleNetworkComponent4);
-
-        clusterNetworkComponent2.addComponent(singleNetworkComponent5);
-        clusterNetworkComponent2.addComponent(singleNetworkComponent6);
-        clusterNetworkComponent2.addComponent(singleNetworkComponent7);
-        clusterNetworkComponent2.addComponent(singleNetworkComponent8);
-
-        clusterNetworkComponent3.addComponent(singleNetworkComponent9);
-        clusterNetworkComponent3.addComponent(singleNetworkComponent10);
-        clusterNetworkComponent3.addComponent(singleNetworkComponent11);
-        clusterNetworkComponent3.addComponent(singleNetworkComponent12);
-
-        clusterNetworkComponent4.addComponent(singleNetworkComponent13);
-        clusterNetworkComponent4.addComponent(singleNetworkComponent14);
-        clusterNetworkComponent4.addComponent(singleNetworkComponent15);
-        clusterNetworkComponent4.addComponent(singleNetworkComponent16);
-
-        clusterNetworkComponent5.addComponent(singleNetworkComponent17);
-        clusterNetworkComponent5.addComponent(singleNetworkComponent18);
-        clusterNetworkComponent5.addComponent(singleNetworkComponent19);
-        clusterNetworkComponent5.addComponent(singleNetworkComponent20);
+        LoggerNetworkDecorator clusterNetworkComponent1 = new LoggerNetworkDecorator(new ClusterNetworkComponent(
+                singleNetworkComponent1,
+                singleNetworkComponent2,
+                singleNetworkComponent3,
+                singleNetworkComponent4));
+        LoggerNetworkDecorator clusterNetworkComponent2 = new LoggerNetworkDecorator(new ClusterNetworkComponent(
+                singleNetworkComponent5,
+                singleNetworkComponent6,
+                singleNetworkComponent7,
+                singleNetworkComponent8));
+        LoggerNetworkDecorator clusterNetworkComponent3 = new LoggerNetworkDecorator(new ClusterNetworkComponent(
+                singleNetworkComponent9,
+                singleNetworkComponent10,
+                singleNetworkComponent11,
+                singleNetworkComponent12));
+        LoggerNetworkDecorator clusterNetworkComponent4 = new LoggerNetworkDecorator(new ClusterNetworkComponent(
+                singleNetworkComponent13,
+                singleNetworkComponent14,
+                singleNetworkComponent15,
+                singleNetworkComponent16));
+        LoggerNetworkDecorator clusterNetworkComponent5 = new LoggerNetworkDecorator(new ClusterNetworkComponent(
+                singleNetworkComponent17,
+                singleNetworkComponent18,
+                singleNetworkComponent19,
+                singleNetworkComponent20));
 
         clusterNetworkComponent2.addComponent(clusterNetworkComponent3);
         clusterNetworkComponent1.addComponent(clusterNetworkComponent2);
 
         clusterNetworkComponent4.addComponent(clusterNetworkComponent5);
 
-        NetworkComponent rootComponent = new LoggerNetworkDecorator(new ClusterNetworkComponent());
-        rootComponent.addComponent(clusterNetworkComponent1);
-        rootComponent.addComponent(clusterNetworkComponent4);
+        NetworkComponent rootComponent = new LoggerNetworkDecorator(new ClusterNetworkComponent(
+                clusterNetworkComponent1,
+                clusterNetworkComponent4));
 
         for (int i = 0; i < 100; i++) {
             rootComponent.doWork();
