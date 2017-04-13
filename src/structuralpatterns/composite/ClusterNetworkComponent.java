@@ -5,10 +5,19 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ClusterNetworkComponent implements NetworkComponent {
+    private String id;
     private int workloadCount;
     private List<NetworkComponent> components = new ArrayList<>();
 
     public ClusterNetworkComponent() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(final String id) {
+        this.id = id;
     }
 
     @Override
