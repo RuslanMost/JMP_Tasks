@@ -35,43 +35,38 @@ public class CompositeTest {
         NetworkComponent singleNetworkComponent19 = new SingleNetworkComponent(new IntelComputer(new MultithreadChip()), 6);
         NetworkComponent singleNetworkComponent20 = new SingleNetworkComponent(new IntelComputer(new MultithreadChip()), 7);
 
-        NetworkComponent clusterNetworkComponent1 = new ClusterNetworkComponent();
-        NetworkComponent clusterNetworkComponent2 = new ClusterNetworkComponent();
-        NetworkComponent clusterNetworkComponent3 = new ClusterNetworkComponent();
-        NetworkComponent clusterNetworkComponent4 = new ClusterNetworkComponent();
-        NetworkComponent clusterNetworkComponent5 = new ClusterNetworkComponent();
-
-        clusterNetworkComponent1.addComponent(singleNetworkComponent1);
-        clusterNetworkComponent1.addComponent(singleNetworkComponent2);
-        clusterNetworkComponent1.addComponent(singleNetworkComponent3);
-        clusterNetworkComponent1.addComponent(singleNetworkComponent4);
-
-        clusterNetworkComponent2.addComponent(singleNetworkComponent5);
-        clusterNetworkComponent2.addComponent(singleNetworkComponent6);
-        clusterNetworkComponent2.addComponent(singleNetworkComponent7);
-        clusterNetworkComponent2.addComponent(singleNetworkComponent8);
-
-        clusterNetworkComponent3.addComponent(singleNetworkComponent9);
-        clusterNetworkComponent3.addComponent(singleNetworkComponent10);
-        clusterNetworkComponent3.addComponent(singleNetworkComponent11);
-        clusterNetworkComponent3.addComponent(singleNetworkComponent12);
-
-        clusterNetworkComponent4.addComponent(singleNetworkComponent13);
-        clusterNetworkComponent4.addComponent(singleNetworkComponent14);
-        clusterNetworkComponent4.addComponent(singleNetworkComponent15);
-        clusterNetworkComponent4.addComponent(singleNetworkComponent16);
-
-        clusterNetworkComponent5.addComponent(singleNetworkComponent17);
-        clusterNetworkComponent5.addComponent(singleNetworkComponent18);
-        clusterNetworkComponent5.addComponent(singleNetworkComponent19);
-        clusterNetworkComponent5.addComponent(singleNetworkComponent20);
+        ClusterNetworkComponent clusterNetworkComponent1 = new ClusterNetworkComponent(
+                singleNetworkComponent1,
+                singleNetworkComponent2,
+                singleNetworkComponent3,
+                singleNetworkComponent4);
+        ClusterNetworkComponent clusterNetworkComponent2 = new ClusterNetworkComponent
+                (singleNetworkComponent5,
+                singleNetworkComponent6,
+                singleNetworkComponent7,
+                singleNetworkComponent8);
+        ClusterNetworkComponent clusterNetworkComponent3 = new ClusterNetworkComponent(
+                singleNetworkComponent9,
+                singleNetworkComponent10,
+                singleNetworkComponent11,
+                singleNetworkComponent12);
+        ClusterNetworkComponent clusterNetworkComponent4 = new ClusterNetworkComponent(
+                singleNetworkComponent13,
+                singleNetworkComponent14,
+                singleNetworkComponent15,
+                singleNetworkComponent16);
+        ClusterNetworkComponent clusterNetworkComponent5 = new ClusterNetworkComponent(
+                singleNetworkComponent17,
+                singleNetworkComponent18,
+                singleNetworkComponent19,
+                singleNetworkComponent20);
 
         clusterNetworkComponent2.addComponent(clusterNetworkComponent3);
         clusterNetworkComponent1.addComponent(clusterNetworkComponent2);
 
         clusterNetworkComponent4.addComponent(clusterNetworkComponent5);
 
-        NetworkComponent rootComponent = new ClusterNetworkComponent();
+        ClusterNetworkComponent rootComponent = new ClusterNetworkComponent();
         rootComponent.addComponent(clusterNetworkComponent1);
         rootComponent.addComponent(clusterNetworkComponent4);
 

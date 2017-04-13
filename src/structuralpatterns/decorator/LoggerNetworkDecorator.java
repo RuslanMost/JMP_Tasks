@@ -2,6 +2,7 @@ package structuralpatterns.decorator;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import structuralpatterns.composite.ClusterNetworkComponent;
 import structuralpatterns.composite.NetworkComponent;
 
 public class LoggerNetworkDecorator extends NetworkDecorator {
@@ -13,22 +14,21 @@ public class LoggerNetworkDecorator extends NetworkDecorator {
 
     @Override
     public void doWork() {
-        LOGGER.info("Starting to do work....");
+        LOGGER.info("Starting to do work of " + networkComponent + " component..");
         networkComponent.doWork();
-        LOGGER.info("Work is finished.");
+        LOGGER.info("Work of " + networkComponent + " component is finished.");
     }
 
     @Override
     public int getWorkload() {
-        int workload = networkComponent.getWorkload();
-        LOGGER.info("workload is " + workload);
-        return workload;
+        return networkComponent.getWorkload();
     }
 
-    @Override
     public void addComponent(final NetworkComponent component) {
         LOGGER.info("Adding " + component + " component.");
-        networkComponent.addComponent(component);
+        if (networkComponent instanceof ClusterNetworkComponent) {
+            ((ClusterNetworkComponent) networkComponent).addComponent(component);
+        }
         LOGGER.info("Adding of " + component + " component is done.");
     }
 }
