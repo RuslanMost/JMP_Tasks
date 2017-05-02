@@ -1,0 +1,1 @@
+include 'dao-layer', 'domain-model', 'web-frontend'
