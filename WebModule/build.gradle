@@ -21,27 +21,6 @@ subprojects {
 	}
 }
 
-project(':dao-layer') {
-	dependencies {
-		compile 'org.hibernate:hibernate-core:4.+'
-	}
-}
-
-project(':domain-model') {
-    dependencies {
-        compile project(':dao-layer')
-    }
-}
-
-project('web-frontend') {
-	apply plugin: 'war'
-	
-	dependencies {
-		compile project (':domain-model')
-		compile 'org.springframework:spring-webmvc:3.+'
-	}
-}
-
 idea {
     project {
         jdkName = langLevel
