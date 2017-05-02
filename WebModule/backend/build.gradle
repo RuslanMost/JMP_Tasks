@@ -1,0 +1,7 @@
+apply plugin: 'application'
+
+dependencies {
+    compile 'org.hibernate:hibernate-core:4.+'
+}
+
+mainClassName = 'com.dabuita.App'

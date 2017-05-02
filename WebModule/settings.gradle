@@ -1,1 +1,1 @@
-include 'dao-layer', 'domain-model', 'web-frontend'
+include 'backend', 'rest', 'web-frontend'
