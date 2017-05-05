@@ -1,58 +1,58 @@
 package com.dabuita.services;
 
-import com.dabuita.dao.BookDao;
+import com.dabuita.dao.BookDaoDefault;
 import com.dabuita.models.Book;
 
 import java.util.List;
 
 public class BookService {
 
-    private static BookDao bookDao;
+    private static BookDaoDefault bookDaoDefault;
 
     public BookService() {
-        bookDao = new BookDao();
+        bookDaoDefault = new BookDaoDefault();
     }
 
     public void persist(Book entity) {
-        bookDao.openCurrentSessionwithTransaction();
-        bookDao.persist(entity);
-        bookDao.closeCurrentSessionwithTransaction();
+        bookDaoDefault.openCurrentSessionwithTransaction();
+        bookDaoDefault.persist(entity);
+        bookDaoDefault.closeCurrentSessionwithTransaction();
     }
 
     public void update(Book entity) {
-        bookDao.openCurrentSessionwithTransaction();
-        bookDao.update(entity);
-        bookDao.closeCurrentSessionwithTransaction();
+        bookDaoDefault.openCurrentSessionwithTransaction();
+        bookDaoDefault.update(entity);
+        bookDaoDefault.closeCurrentSessionwithTransaction();
     }
 
     public Book findById(String id) {
-        bookDao.openCurrentSession();
-        Book book = bookDao.findById(id);
-        bookDao.closeCurrentSession();
+        bookDaoDefault.openCurrentSession();
+        Book book = bookDaoDefault.findById(id);
+        bookDaoDefault.closeCurrentSession();
         return book;
     }
 
     public void delete(String id) {
-        bookDao.openCurrentSessionwithTransaction();
-        Book book = bookDao.findById(id);
-        bookDao.delete(book);
-        bookDao.closeCurrentSessionwithTransaction();
+        bookDaoDefault.openCurrentSessionwithTransaction();
+        Book book = bookDaoDefault.findById(id);
+        bookDaoDefault.delete(book);
+        bookDaoDefault.closeCurrentSessionwithTransaction();
     }
 
     public List<Book> findAll() {
-        bookDao.openCurrentSession();
-        List<Book> books = bookDao.findAll();
-        bookDao.closeCurrentSession();
+        bookDaoDefault.openCurrentSession();
+        List<Book> books = bookDaoDefault.findAll();
+        bookDaoDefault.closeCurrentSession();
         return books;
     }
 
     public void deleteAll() {
-        bookDao.openCurrentSessionwithTransaction();
-        bookDao.deleteAll();
-        bookDao.closeCurrentSessionwithTransaction();
+        bookDaoDefault.openCurrentSessionwithTransaction();
+        bookDaoDefault.deleteAll();
+        bookDaoDefault.closeCurrentSessionwithTransaction();
     }
 
-    public BookDao bookDao() {
-        return bookDao;
+    public BookDaoDefault bookDao() {
+        return bookDaoDefault;
     }
 }

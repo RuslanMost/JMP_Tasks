@@ -1,24 +1,24 @@
 def langLevel = 1.8
 
 allprojects {
-	apply plugin: 'idea'
+    apply plugin: 'idea'
     group = 'com.dabuita'
     version = '0.1'
-	task greetings << { task -> println "I'm $task.project.name project" }
+    task greetings << { task -> println "I'm $task.project.name project" }
 }
 
 subprojects {
     apply plugin: 'java'
-	sourceCompatibility = langLevel
-	targetCompatibility = langLevel
+    sourceCompatibility = langLevel
+    targetCompatibility = langLevel
     repositories {
         mavenCentral()
-		mavenLocal()
+        mavenLocal()
     }
-	
-	dependencies {
-		testCompile 'junit:junit:4.+'
-	}
+
+    dependencies {
+        testCompile 'junit:junit:4.+'
+    }
 }
 
 idea {
