@@ -57,6 +57,13 @@
       </root>
     </artifact>
   </component>
+  <component name="CheckStyle-IDEA">
+    <option name="configuration">
+      <map>
+        <entry key="scan-before-checkin" value="false" />
+      </map>
+    </option>
+  </component>
   <component name="CompilerConfiguration">
     <resourceExtensions>
       <entry name=".+\.(properties|xml|html|dtd|tld)" />
