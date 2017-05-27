@@ -15,8 +15,8 @@ public class Book {
     @Column(name = "title")
     private String title;
 
-    @Column(name= "author")
-    String author;
+    @Column(name = "author")
+    private String author;
 
     public Book() {
     }
