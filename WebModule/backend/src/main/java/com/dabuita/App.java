@@ -2,12 +2,15 @@ package com.dabuita;
 
 import com.dabuita.models.Book;
 import com.dabuita.services.BookService;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-        BookService bookService = new BookService();
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("jpaContext.xml");
+        BookService bookService = context.getBean(BookService.class);
+        System.out.println(bookService);
         Book book1 = new Book("1", "The Brothers Karamazov", "Fyodor Dostoevsky");
         Book book2 = new Book("2", "War and Peace", "Leo Tolstoy");
         Book book3 = new Book("3", "Pride and Prejudice", "Jane Austen");
