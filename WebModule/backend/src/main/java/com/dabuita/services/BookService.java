@@ -13,13 +13,11 @@ public class BookService {
     @Autowired
     private BookDao bookDao;
 
-    //trans
     @Transactional
     public void persist(Book entity) {
         bookDao.persist(entity);
     }
 
-    //trans
     @Transactional
     public void update(Book entity) {
         bookDao.update(entity);
@@ -29,7 +27,7 @@ public class BookService {
         Book book = bookDao.find(id);
         return book;
     }
-    //trans
+
     @Transactional
     public void delete(String id) {
         Book book = bookDao.find(id);
@@ -40,7 +38,7 @@ public class BookService {
         List<Book> books = bookDao.findAll();
         return books;
     }
-    //trans
+
     @Transactional
     public void deleteAll() {
         bookDao.deleteAll();

@@ -5,15 +5,15 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-public class GenericDaoImpl implements BookDao {
-
+public class BookDaoImpl implements BookDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public GenericDaoImpl() {
+    public BookDaoImpl() {
     }
 
     public void persist(Book entity) {
@@ -25,7 +25,9 @@ public class GenericDaoImpl implements BookDao {
     }
 
     public Book find(String id) {
-        return entityManager.find(Book.class, id);
+        Query query = entityManager.createNamedQuery("find book by id");
+        query.setParameter("id", id);
+        return (Book) query.getSingleResult();
     }
 
     public void delete(Book entity) {

@@ -1,12 +1,10 @@
 package com.dabuita.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "Book")
+@Table
+@NamedQuery(query = "Select b from Book b where b.id = :id", name = "find book by id")
 public class Book {
     @Id
     @Column
