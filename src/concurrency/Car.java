@@ -19,17 +19,16 @@ public class Car implements Runnable {
 
     @Override
     public void run() {
-        try {
-            while (distance < FastAndFurious.MAX_DISTANCE && !Thread.currentThread().isInterrupted()) {
-                Thread.sleep(friction);
-                distance += move();
+        while (distance < FastAndFurious.MAX_DISTANCE) {
+            if (Thread.currentThread().isInterrupted()) {
+                System.out.println(this.getName() + " was killed");
                 LOG.info(name + "; Distance " + distance + "; Speed " + speed);
+                return;
             }
-            setWinnerName(this.getName());
-        } catch (InterruptedException e) {
-            System.out.println(getName() + " was disqualified. What a bummer!");
-            LOG.error("Exception is next: " + e);
+            distance += move();
         }
+        setWinnerName(this.getName());
+
     }
 
     private static synchronized void setWinnerName(String winnerName) {

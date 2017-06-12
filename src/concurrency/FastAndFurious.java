@@ -5,14 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FastAndFurious {
-    public static final long MAX_DISTANCE = 3000;
+    public static final long MAX_DISTANCE = 999999999;
     private ArrayList<Car> cars = new ArrayList<>();
 
     public static void main(String[] args) throws InterruptedException {
         FastAndFurious race = new FastAndFurious();
-        race.getCars().add(new Car("BMW", 300, 100));
-        race.getCars().add(new Car("Ferrari", 160, 243));
-        race.getCars().add(new Car("Kopeyka", 356, 330));
+        race.getCars().add(new Car("BMW", 300, 1));
+        race.getCars().add(new Car("Ferrari", 160, 3));
+        race.getCars().add(new Car("Kopeyka", 356, 6));
         race.begin();
     }
 
@@ -35,7 +35,7 @@ public class FastAndFurious {
     }
 
     public void printWinner() {
-        System.out.println(Car.getWinner());
+        System.out.println("The winner is " + Car.getWinner() + "!");
     }
 
     public ArrayList<Car> getCars() {
