@@ -4,11 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Car implements Runnable {
-    public static final Logger LOG = LoggerFactory.getLogger(Car.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Car.class);
     private long friction;
     private double distance;
     private String name;
     private double speed;
+    private static String winner;
 
     public Car(String name, long friction, double speed) {
         this.name = name;
@@ -24,10 +25,21 @@ public class Car implements Runnable {
                 distance += move();
                 LOG.info(name + "; Distance " + distance + "; Speed " + speed);
             }
+            setWinnerName(this.getName());
         } catch (InterruptedException e) {
             System.out.println(getName() + " was disqualified. What a bummer!");
             LOG.error("Exception is next: " + e);
         }
+    }
+
+    private static synchronized void setWinnerName(String winnerName) {
+        if (winner == null) {
+            winner = winnerName;
+        }
+    }
+
+    public static String getWinner() {
+        return winner;
     }
 
     private double move() {
