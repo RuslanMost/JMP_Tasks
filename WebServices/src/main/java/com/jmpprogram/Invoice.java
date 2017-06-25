@@ -1,6 +1,13 @@
 package com.jmpprogram;
 
 public class Invoice {
-    public Invoice() {
+    private int invoice;
+
+    public Invoice(final int invoice) {
+        this.invoice = invoice;
+    }
+
+    public int getInvoice() {
+        return invoice;
     }
 }
