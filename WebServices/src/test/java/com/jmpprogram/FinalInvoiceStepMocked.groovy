@@ -3,27 +3,25 @@ package com.jmpprogram
 import spock.lang.Specification
 
 class FinalInvoiceStepMocked extends Specification {
+    def printerService = Mock(PrinterService)
+    def emailService = Mock(EmailService)
+    def finalInvoiceStep
+    def invoice = Mock(Invoice) {
+        getInvoice() >> 123
+    }
+
+    def setup() {
+        finalInvoiceStep = new FinalInvoiceStep(printerService, emailService)
+    }
 
     def "different-customer-types-test"() {
         setup:
-        def printerService = Mock(PrinterService)
-        def emailService = Mock(EmailService)
-        def finalInvoiceStep = new FinalInvoiceStep(printerService, emailService)
 
         def customerWhoWantsEmail = Mock(Customer) {
             getEmail() >> Mock(Email) {
                 getMessage() >> "Some private email message"
             }
             isWantsEmail() >> true
-        }
-        def customerWhoWantsSnailMail = Mock(Customer) {
-            getEmail() >> Mock(Email) {
-                getMessage() >> _
-            }
-            isWantsEmail() >> false
-        }
-        def invoice = Mock(Invoice) {
-            getInvoice() >> 123
         }
 
         when: "customer is normal and has an email inbox"
@@ -33,6 +31,16 @@ class FinalInvoiceStepMocked extends Specification {
         0 * printerService.printInvoice(invoice)
         1 * emailService.sendInvoice(invoice, customerWhoWantsEmail.email)
         assert customerWhoWantsEmail.email.message == "Some private email message"
+    }
+
+    def "customer who wants snail mail"() {
+        setup:
+        def customerWhoWantsSnailMail = Mock(Customer) {
+            getEmail() >> Mock(Email) {
+                getMessage() >> _
+            }
+            isWantsEmail() >> false
+        }
 
         when: "customer is old fashioned and prefers snail mail"
         finalInvoiceStep.handleInvoice(invoice, customerWhoWantsSnailMail)
