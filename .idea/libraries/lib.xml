@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/WebServices/lib/jersey-media-jaxb.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebServices/lib/jersey-common.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebServices/lib/jersey-client.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebServices/lib/jersey-server.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebServices/lib/jersey-container-servlet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebServices/lib/jersey-container-servlet-core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebServices/lib/spock-core-1.1-groovy-2.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

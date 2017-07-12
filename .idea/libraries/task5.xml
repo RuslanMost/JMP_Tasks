@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="task5">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/WebServices_war_exploded/WEB-INF/classes/troubleshooting/task5/thread_overview_with_leak.zip!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/WebServices_war_exploded/WEB-INF/classes/troubleshooting/task5/thread_overview_without_leak.zip!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/WebServices_war_exploded/WEB-INF/classes/troubleshooting/task5/dominator_tree_with_leak.zip!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/WebServices_war_exploded/WEB-INF/classes/troubleshooting/task5/dominator_tree_without_leak.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

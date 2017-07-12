@@ -1,23 +1,43 @@
 def langLevel = 1.8
-
+buildscript {
+    ext {
+        springBootVersion = '1.5.4.RELEASE'
+        dependencyManagementPluginVersion = '1.0.3.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("io.spring.gradle:dependency-management-plugin:${dependencyManagementPluginVersion}")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
 allprojects {
+    apply plugin: 'java'
     apply plugin: 'idea'
+    apply plugin: 'io.spring.dependency-management'
     group = 'com.dabuita'
     version = '0.1'
-    task greetings << { task -> println "I'm $task.project.name project" }
 }
 
 subprojects {
-    apply plugin: 'java'
-    sourceCompatibility = langLevel
-    targetCompatibility = langLevel
+    apply plugin: 'io.spring.dependency-management'
     repositories {
         mavenCentral()
-        mavenLocal()
     }
+    sourceCompatibility = langLevel
+    targetCompatibility = langLevel
 
     dependencies {
-        testCompile 'junit:junit:4.+'
+        runtime('mysql:mysql-connector-java')
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+    }
+    compileJava.dependsOn(processResources)
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+//          mavenBom("org.springframework.boot:spring-boot-starter-parent:${springBootVersion}")
+        }
     }
 }
 
@@ -27,3 +47,5 @@ idea {
         languageLevel = langLevel
     }
 }
+
+

@@ -1,18 +1,38 @@
+buildscript {
+    repositories { mavenCentral() }
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+
+ext { springBootVersion = '1.5.4.RELEASE' }
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    baseName = 'jmp-multi-module-backend'
+    version = '0.0.1-SNAPSHOT'
+}
+
 dependencies {
-    compile 'org.hibernate:hibernate-core:4.1.9.Final'
-    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile('org.hibernate:hibernate-core:4.1.9.Final')
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.1.9.Final'
-    // https://mvnrepository.com/artifact/javax.transaction/jta
     compile group: 'javax.transaction', name: 'javax.transaction-api', version: '1.2'
-    // https://mvnrepository.com/artifact/org.springframework/spring-jdbc
-    compile group: 'org.springframework', name: 'spring-jdbc', version: '4.3.8.RELEASE'
-    // https://mvnrepository.com/artifact/org.springframework/spring-orm
-    compile group: 'org.springframework', name: 'spring-orm', version: '4.3.8.RELEASE'
-    // https://mvnrepository.com/artifact/org.springframework/spring-core
-    compile group: 'org.springframework', name: 'spring-core', version: '4.3.8.RELEASE'
-    // https://mvnrepository.com/artifact/org.springframework/spring-context
-    compile group: 'org.springframework', name: 'spring-context', version: '4.3.8.RELEASE'
-    // https://mvnrepository.com/artifact/org.springframework/spring-oxm
-    compile group: 'org.springframework', name: 'spring-oxm', version: '4.3.8.RELEASE'
+//    compile group: 'org.springframework', name: 'spring-jdbc', version: '4.3.8.RELEASE'
+//    compile group: 'org.springframework', name: 'spring-orm', version: '4.3.8.RELEASE'
+//    compile group: 'org.springframework', name: 'spring-core', version: '4.3.8.RELEASE'
+//    compile group: 'org.springframework', name: 'spring-context', version: '4.3.8.RELEASE'
+//    compile group: 'org.springframework', name: 'spring-oxm', version: '4.3.8.RELEASE'
+
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.boot:spring-boot-starter-web')
+
+    compile("org.springframework.boot:spring-boot-configuration-processor")
+}
+
+dependencyManagement {
+    imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
 }
